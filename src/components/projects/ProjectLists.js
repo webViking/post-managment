@@ -1,14 +1,16 @@
 import React from 'react'
 import ProjectSummary from './ProjectSummary'
-const ProjectLists = ()=>{
+const ProjectLists = ({projects})=>{
     
+    //{project && we check if are projects if there wont be then the second part wont execute
     return(
-        
+
         <div className = "project-list section">
-            <ProjectSummary/>
-            <ProjectSummary/>
-            <ProjectSummary/>
-            <ProjectSummary/>
+        
+            {projects && projects.map(project=>{
+                //project = {project} we passing as a props to ProjectSUmmary component because we want to execute props already have
+                return <ProjectSummary projects = {project} key ={project.id}/>
+            })}
         </div>
          
         )
