@@ -1,38 +1,64 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
-export default class SignIn extends Component{
+import { connect } from 'react-redux'
+
+import { signIn } from '../../store/actions/authActions'
+import {Redirect} from 'react-router-dom'
+
+
+class SignIn extends Component {
     state = {
         email: '',
         password: ''
     }
-    handleChange = (e)=>{
+    handleChange = (e) => {
         this.setState({
             //id password or email
-            [e.target.id]:e.target.value
+            [e.target.id]: e.target.value
         })
     }
-    handleSubmit = (e)=>{
+    handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
+        this.props.onSignIn(this.state)
     }
-    render(){
-        return(
+    render() {
+        if(this.props.auth.uid){
+            return <Redirect to="/" />
+        }
+        return (
             <div className="container">
-                <form onSubmit= {this.handleSubmit} className="white">
+                <form onSubmit={this.handleSubmit} className="white">
+                    <div className="red-text center">
+                        {this.props.authErr ? <p>{this.props.authErr}</p> : null}
+                    </div>
                     <h5 className="grey-text text-darken-3">Sign In</h5>
                     <div className="input-field">
                         <label htmlFor="email">Email</label>
-                        <input type="email" id = "email" onChange ={this.handleChange}/>
+                        <input type="email" id="email" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id = "password" onChange ={this.handleChange}/>
+                        <input type="password" id="password" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
                         <button className="btn blue lighten-1 z-depth-0">Login</button>
+
                     </div>
                 </form>
             </div>
         )
     }
-} 
+}
+const mapStateToProps = (state) => {
+    return {
+        authErr: state.auth.authError,
+        auth: state.firebase.auth
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSignIn: (credentials) => { dispatch(signIn(credentials)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
