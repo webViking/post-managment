@@ -1,4 +1,4 @@
-# Burger Builder Project 
+# Post Management Project
 
 ## Installation
 Use the package manager npm to install project and to run.
