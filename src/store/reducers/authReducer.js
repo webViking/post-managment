@@ -22,7 +22,7 @@ const initialState = {
         console.log('Login failed')
         return{
             ...state,
-            authError: 'Fail',
+            authError: action.err.message,
             loading: false
         }
         case 'SIGNOUT_SUCCESS':

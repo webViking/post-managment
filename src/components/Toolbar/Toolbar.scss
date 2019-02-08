@@ -9,6 +9,7 @@ $hover-color:#7dd9e4;
     position: fixed;
     background: $background-color;
     height: 66px;
+    z-index: 500;
 
     .toolbar__navigation{
         display: flex;

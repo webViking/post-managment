@@ -12,7 +12,7 @@ export const loginSuccess = () =>{
 export const loginError = (err) =>{
     return{
         type:'LOGIN_ERR',
-        err:err
+        err
     }
 }
 export const signIn = (credentials) => {
