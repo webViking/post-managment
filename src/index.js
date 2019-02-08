@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './containers/App';
 import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
-
+import './index.css'
 //Reducers
 import authReducer from './store/reducers/authReducer'
 import projectReducer from './store/reducers/projectReducer'
@@ -36,7 +36,7 @@ const store = createStore(rootReducer,
         getFirebase,getFirestore
     })),
     reduxFirestore(fbConfig),
-    reactReduxFirebase(fbConfig,{attachAuthIsReady:true})
+    reactReduxFirebase(fbConfig,{attachAuthIsReady:true, useFirestoreForProfile:true, userProfile:'users'})
     )    
 )
 

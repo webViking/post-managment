@@ -1,0 +1,6 @@
+.p__details-span{
+    color:#111;
+}
+.p__details-span:hover{
+    cursor: pointer;
+}

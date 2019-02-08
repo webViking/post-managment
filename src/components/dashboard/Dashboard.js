@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import { Redirect } from 'react-router-dom'
+//import Spinner from '../spinner/Spinner'
 
 class Dashboard extends Component {
 
@@ -16,7 +17,8 @@ class Dashboard extends Component {
 
     render() {
         //this past props to ProjectList component
-        const { projects } = this.props;
+        const { projects, notifications } = this.props;
+
         let permit = null
         if (this.props.auth.uid) {
             permit = (
@@ -25,7 +27,7 @@ class Dashboard extends Component {
                         <ProjectLists projects={projects} />
                     </div>
                     <div className="col s12 m3 offset-1">
-                        <Notifications />
+                        <Notifications projectNotifications = {notifications}/>
                     </div>
                 </div>
             )
@@ -46,14 +48,14 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
     return {
         projects: state.firestore.ordered.projects,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        loading: state.auth.loading,
+        notifications: state.firestore.ordered.notifications
     }
 }
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([{
-        collection: 'projects'
-    }])
+    firestoreConnect([{collection: 'projects',orderBy:['createdAt','desc']},{collection:'notifications', limit:3, orderBy:['time','desc']}])
 )(Dashboard)
 

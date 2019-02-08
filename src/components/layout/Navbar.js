@@ -9,10 +9,12 @@ import SignOutLink from './SignOutLink'
 import {connect} from 'react-redux'
 
 const Navbar = (props)=>{
+    const {profile} = props
+
     let links = null
     if(props.auth.uid){
         links = (
-            <SignInLink/>
+            <SignInLink profileProp = {profile}/>
         )
         
     }else{
@@ -30,7 +32,8 @@ const Navbar = (props)=>{
 const mapStateToProps = (state) => {
     return{
         //this is initial firebase prop
-        auth:state.firebase.auth
+        auth:state.firebase.auth,
+        profile: state.firebase.profile
     }
 }
 

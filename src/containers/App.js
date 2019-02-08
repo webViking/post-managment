@@ -12,8 +12,7 @@ import SignIn from '../components/auth/SignIn';
 import SignUp from '../components/auth/SignUp';
 import CreateProject from '../components/projects/CreateProjects';
 
-//HOC imports
-import Auxi from '../hoc/Auxi'
+
 
 //28
 
@@ -54,7 +53,7 @@ export default class App extends Component {
   `
 
     return (
-      <Auxi>
+      <React.Fragment>
         <GlobalStyles/>
             <Navbar/>
         <Switch>
@@ -65,7 +64,7 @@ export default class App extends Component {
           <Route path="/create-project" component = {CreateProject}/>
         </Switch>
          
-      </Auxi>
+      </React.Fragment>
     );
   }
 }
